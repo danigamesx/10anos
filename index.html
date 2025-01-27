@@ -65,7 +65,7 @@
             margin: 20px 0;
         }
         .quiz-image {
-            max-width: 80%;
+            max-width: 80%; /* Redimensiona a imagem do quiz */
             height: auto;
             margin: 10px 0;
         }
@@ -117,48 +117,10 @@
         </header>
         <img src="https://previews.dropbox.com/p/thumb/ACgtVCA6eQ23S-QnNRAAa0Xfsn-1Z2i6YQdvlGRf0kqj2xFTmXj4iRLnqT01SjYRqRAneisBGggELJRKV3vUMyDL0End22Ixqekoy5vOj2glWqx6_0clIqfPZ0D8PYgi8ddaLHOMWuqJu9_K4OYtgaiQTivJ_9rAt-IF4OVsncJPsHNB1woOl-Oeli8WkJGh7k2A4q_OTZxE1_9WSfit7L25dcKZce9Nk6p6Gfbs_MiVVysSXmbb4sx5djdy6dkD68o-4SvDh-4hIaMAkoFzuMmaAKJDaIK8FxzCbd9p1jBoo01fNd6-8Z4ZmhPw1xptUHY/p.jpeg" alt="Imagem da mensagem final">
         <p>Esses 10 anos são apenas o começo. Quero viver mais décadas ao seu lado, criando novos sonhos, conquistando novas vitórias e sempre te amando com tudo que sou. Hoje é um dia especial porque é sobre nós, e você é a razão de tudo isso ser tão mágico.</p>
-        <button onclick="nextSlide(6)">Ver Memórias</button>
-    </div>
-
-    <div class="slide" id="slide-6">
-        <header>
-            <h1>Memórias</h1>
-        </header>
-        <div id="memories-container">
-            <div class="memory">
-                <img src="https://i.ibb.co/4W42FjS/FB-IMG-1655118367167.jpg" alt="Memória 1">
-                <p><strong>Nosso primeiro aniversário:</strong> Celebramos com um jantar romântico.</p>
-            </div>
-            <div class="memory">
-                <img src="https://i.ibb.co/5RSwrwG/20231216-175644.jpg" alt="Memória 2">
-                <p><strong>Viagem para a praia:</strong> Momentos inesquecíveis juntos.</p>
-            </div>
-            <div class="memory">
-                <img src="https://i.ibb.co/3cQNy9Q/20211107-183402.jpg" alt="Memória 3">
-                <p><strong>Dançando no CTG:</strong> A noite mais divertida da nossa vida.</p>
-            </div>
-        </div>
-        <button onclick="nextSlide(7)">Ver Mensagens de Amor</button>
-    </div>
-
-    <div class="slide" id="slide-7">
-        <header>
-            <h1>Mensagens de Amor</h1>
-        </header>
-        <p id="love-message"></p>
-        <button onclick="showRandomMessage()">Mostrar Mensagem</button>
-        <button onclick="nextSlide(8)">Finalizar</button>
-    </div>
-
-    <div class="slide" id="slide-8">
-        <header>
-            <h1>Obrigado por Tudo!</h1>
-        </header>
-        <p>Você é a razão do meu sorriso e da minha felicidade. Te amo!</p>
         <button onclick="alert('Te amo! 💖')">Finalizar</button>
     </div>
 
-        <script>
+    <script>
         const questions = [
             {
                 question: "Qual foi o nosso primeiro destino de viagem juntos?",
@@ -317,14 +279,7 @@
             document.getElementById(`slide-${slideIndex}`).classList.add('active');
             if (slideIndex === 3) {
                 displayQuestion(); // Exibe a primeira pergunta do quiz
-            } else if (slideIndex === 7) {
-                showRandomMessage(); // Exibe uma mensagem aleatória
             }
-        }
-
-        function showRandomMessage() {
-            const randomIndex = Math.floor(Math.random() * loveMessages.length);
-            document.getElementById('love-message').textContent = loveMessages[randomIndex];
         }
 
         displayQuestion();
