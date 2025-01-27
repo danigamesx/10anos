@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>10 Anos de Amor</title>
+    <style>
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            margin: 0;
+            padding: 0;
+            background-color: #fffaf0;
+            color: #333;
+            overflow-x: hidden;
+        }
+        .slide {
+            display: none;
+            position: relative;
+            width: 100%;
+            height: 100%;
+            padding: 20px;
+            box-sizing: border-box;
+            background-color: #ffe4e1;
+            color: #333;
+            text-align: center;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.5s ease;
+            overflow-y: auto;
+        }
+        .slide.active {
+            display: flex;
+        }
+        header {
+            background-color: #ff6b6b;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            border-radius: 0 0 10px 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2 {
+            color: #fff;
+        }
+        button {
+            background-color: #ff6b6b;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+            font-size: 1.1em;
+        }
+        button:hover {
+            background-color: #e55b5b;
+        }
+        img {
+            max-width: 100%;
+            max-height: 300px;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin: 20px 0;
+        }
+        .quiz-image {
+            max-width: 80%;
+            height: auto;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide active" id="slide-1">
+        <header>
+            <h1>10 Anos de Amor</h1>
+        </header>
+        <img src="https://previews.dropbox.com/p/thumb/AChTNzgBjCKgs3JV_ynAi98qZgoK9VHrsa100rER-CEJoAXH_-yAK9GEp-XpMQyQAnvEtw03MYL0ZsOtuHdc9kURJe8uuLLb3owHDeOKQzxRPep_9yOR92ujWk1YQDGB6NugZEZX42ioO6ZD-1KAyBqGOUqyvBtzllskbe19FymTvZkGz_z3vhtYm3Rn6yUPinEOXkqLlYlL_3eQ0uBv-u17s0WU-vU0FH1oYLD7cx7Y3D4VMSWl9OGyAbVCgnzw1cgjk4-f_fTabIsZloj5WrJsBGjln71JbOiinXdrUlanXb97z2M75mOKZYAnCy3WO-pNIVbeDb7Bg6C-n39Dh7yH/p.jpeg?is_prewarmed=true" alt="Imagem representativa do amor">
+        <p>Bem-vinda a nossa jornada, meu amor!</p>
+        <button onclick="nextSlide(2)">Prosseguir</button>
+    </div>
+
+    <div class="slide" id="slide-2">
+        <header>
+            <h1>Nossa História</h1>
+        </header>
+        <img src="https://previews.dropbox.com/p/thumb/ACjIAeZJi3lfgv62lvqnG3KdO4CQKgykDi8gzp0LdXswnAE4vWKsJoYUuTBAcVPUABOrsJPSw5I42YezBgj9txLdAoNVu797UTl-b7kYKUShtZez74EMVuXcWoJVStm4q3VEQfWjn0kTvKU8XA9SezAuE9jFQAbr1tmeM2R9zFRgom_sy_xXlb2UbT303pYmHyGPYjObqTU4AzFZ-ZGHkxU8KKsqMsWC_isRbQqMCyNfcUNRVyycKRsGcJ8wNef1Jxp9WFLBCUCw8HNDx2IfgjJ98KQ0mHsqWdnntX0T1LRAwT5hyWliVwXO2uDGhjPGrXg/p.jpeg" alt="Imagem da nossa história">
+        <p><strong>2015:</strong> O início de tudo... quando te conheci e minha vida mudou para sempre.</p>
+        <button onclick="nextSlide(3)">Prosseguir</button>
+    </div>
+
+    <div class="slide" id="slide-3">
+        <header>
+            <h1>Quiz do Amor</h1>
+        </header>
+        <div id="quiz">
+            <p id="quiz-question"></p>
+            <img id="quiz-image" class="quiz-image" src="" alt="Imagem da pergunta do quiz">
+            <div id="quiz-options"></div>
+        </div>
+        <button onclick="nextQuizQuestion()">Próxima pergunta</button>
+        <button onclick="finalizeQuiz()" style="display: none;">Finalizar Quiz</button>
+    </div>
+
+    <div class="slide" id="slide-4">
+        <header>
+            <h1>Resultado do Quiz</h1>
+        </header>
+        <p id="quiz-result"></p>
+        <button onclick="nextSlide(5)">Continuar</button>
+    </div>
+
+    <div class="slide" id="slide-5">
+        <header>
+            <h1>Mensagem Final</h1>
+        </header>
+        <img src="https://previews.dropbox.com/p/thumb/ACgtVCA6eQ23S-QnNRAAa0Xfsn-1Z2i6YQdvlGRf0kqj2xFTmXj4iRLnqT01SjYRqRAneisBGggELJRKV3vUMyDL0End22Ixqekoy5vOj2glWqx6_0clIqfPZ0D8PYgi8ddaLHOMWuqJu9_K4OYtgaiQTivJ_9rAt-IF4OVsncJPsHNB1woOl-Oeli8WkJGh7k2A4q_OTZxE1_9WSfit7L25dcKZce9Nk6p6Gfbs_MiVVysSXmbb4sx5djdy6dkD68o-4SvDh-4hIaMAkoFzuMmaAKJDaIK8FxzCbd9p1jBoo01fNd6-8Z4ZmhPw1xptUHY/p.jpeg" alt="Imagem da mensagem final">
+        <p>Esses 10 anos são apenas o começo. Quero viver mais décadas ao seu lado, criando novos sonhos, conquistando novas vitórias e sempre te amando com tudo que sou. Hoje é um dia especial porque é sobre nós, e você é a razão de tudo isso ser tão mágico.</p>
+        <button onclick="nextSlide(6)">Ver Memórias</button>
+    </div>
+
+    <div class="slide" id="slide-6">
+        <header>
+            <h1>Memórias</h1>
+        </header>
+        <div id="memories-container">
+            <div class="memory">
+                <img src="https://i.ibb.co/4W42FjS/FB-IMG-1655118367167.jpg" alt="Memória 1">
+                <p><strong>Nosso primeiro aniversário:</strong> Celebramos com um jantar romântico.</p>
+            </div>
+            <div class="memory">
+                <img src="https://i.ibb.co/5RSwrwG/20231216-175644.jpg" alt="Memória 2">
+                <p><strong>Viagem para a praia:</strong> Momentos inesquecíveis juntos.</p>
+            </div>
+            <div class="memory">
+                <img src="https://i.ibb.co/3cQNy9Q/20211107-183402.jpg" alt="Memória 3">
+                <p><strong>Dançando no CTG:</strong> A noite mais divertida da nossa vida.</p>
+            </div>
+        </div>
+        <button onclick="nextSlide(7)">Ver Mensagens de Amor</button>
+    </div>
+
+    <div class="slide" id="slide-7">
+        <header>
+            <h1>Mensagens de Amor</h1>
+        </header>
+        <p id="love-message"></p>
+        <button onclick="showRandomMessage()">Mostrar Mensagem</button>
+        <button onclick="nextSlide(8)">Finalizar</button>
+    </div>
+
+    <div class="slide" id="slide-8">
+        <header>
+            <h1>Obrigado por Tudo!</h1>
+        </header>
+        <p>Você é a razão do meu sorriso e da minha felicidade. Te amo!</p>
+        <button onclick="alert('Te amo! 💖')">Finalizar</button>
+    </div>
+
+        <script>
+        const questions = [
+            {
+                question: "Qual foi o nosso primeiro destino de viagem juntos?",
+                options: ["Jurerê", "Bombinhas", "Gravatal", "Camboriu"],
+                answer: 0,
+                image: "https://previews.dropbox.com/p/thumb/AChD8gz2D-on3x-tOEslhkuozbwZIEHeXD6wW5LgaiDhzmjrGoeOzS5lsng9UoKjAcex7myXmVeNGc8AcbmEq7cJzlrVrr8OZzz1erPqn5AEOOAmlZHMLim_aFDZNWUn40eU8Wa_ZE9BAO3iyyPq3XfrZaYY2FjCorkMko46rFEExX6w7rPgpxOdhL7ViV4GcsP9xzzgCI4LAPBANDy1ON6OpBfnekZOgACns2eQACznIgNNQy4OTKu5XhnR0De9VTtzliRsGfS5J06g60gmoA13t7VQGA1ScN2EKKWW5s-RveKIZbqKCwxhfZcTgSsy04c/p.jpeg"
+            },
+            {
+                question: "Onde foi o nosso primeiro beijo?",
+                options: ["Praia", "Praça", "Boliche", "CTG"],
+                answer: 3,
+                image: "https://previews.dropbox.com/p/thumb/ACgtVCA6eQ23S-QnNRAAa0Xfsn-1Z2i6YQdvlGRf0kqj2xFTmXj4iRLnqT01SjYRqRAneisBGggELJRKV3vUMyDL0End22Ixqekoy5vOj2glWqx6_0clIqfPZ0D8PYgi8ddaLHOMWuqJu9_K4OYtgaiQTivJ_9rAt-IF4OVsncJPsHNB1woOl-Oeli8WkJGh7k2A4q_OTZxE1_9WSfit7L25dcKZce9Nk6p6Gfbs_MiVVysSXmbb4sx5djdy6dkD68o-4SvDh-4hIaMAkoFzuMmaAKJDaIK8FxzCbd9p1jBoo01fNd6-8Z4ZmhPw1xptUHY/p.jpeg"
+            },
+            {
+                question: "Qual era um dos dias que era permitido te visitar?",
+                options: ["Segunda", "Terça", "Quarta", "Quinta"],
+                answer: 2,
+                image: "https://i.ibb.co/9tHX8WL/20231105-170037.jpg"
+            },
+            {
+                question: "Qual é a nossa música?",
+                options: ["Perfect - Ed Sheeran", "Juro - Banda Ego", "Garota de Ipanema", "Te Amo - Roberto Carlos"],
+                answer: 1,
+                image: "https://i.ibb.co/5RSwrwG/20231216-175644.jpg"
+            },
+            {
+                question: "Qual foi o nosso primeiro animal de estimação?",
+                options: ["Cachorro", "Gato", "Pássaro", "Peixe"],
+                answer: 0,
+                image: "https://i.ibb.co/n65zLbz/20240428-194510.jpg"
+            },
+            {
+                question: "Qual é o nosso sonho juntos?",
+                options: ["Viajar", "Ter uma casa própria", "Ter filhos", "Abrir um negócio"],
+                answer: 1,
+                image: "https://i.ibb.co/4W42FjS/FB-IMG-1655118367167.jpg"
+            },
+            {
+                question: "Qual cor você prefere que eu use?",
+                options: ["Roxo", "Azul", "Cinza", "Preto"],
+                answer: 3,
+                image: "https://i.ibb.co/2Zb25D7/IMG-20210127-WA0052.jpg"
+            },
+            {
+                question: "Qual a minha comida favorita?",
+                options: ["Strogonoff", "Massa", "Churrasco", "Hamburguer"],
+                answer: 2,
+                image: "https://i.ibb.co/kBmCs4K/IMG-20210127-WA0084.jpg"
+            },
+            {
+                question: "Qual é a nossa tradição favorita?",
+                options: ["Jantar em família", "Fazer uma viagem todo ano", "Trocar presentes no Natal", "Assistir filmes juntos"],
+                answer: 1,
+                image: "https://i.ibb.co/0MNwv4Y/IMG-20210127-WA0232.jpg"
+            },
+            {
+                question: "Onde foi o nosso primeiro dia dos namorados?",
+                options: ["No cinema", "No Pato Lanches", "Em casa", "No Raupps"],
+                answer: 3,
+                image: "https://i.ibb.co/FmDRG0X/DSC9625.jpg"
+            },
+            {
+                question: "Qual foi a nossa primeira dança?",
+                options: ["Chotes Carreirinho", "Anú", "Tatu com voltas no meio", "Maçanico"],
+                answer: 3,
+                image: "https://i.ibb.co/cNsrfJG/20210127-133130.jpg"
+            },
+            {
+                question: "O que dizia na camisa do Urso que você ganhou junto com a aliança de namoro?",
+                options: ["Amo você", "DanKelly", "Daniel e Kérolen", "Dani e Kelly"],
+                answer: 1,
+                image: "https://i.ibb.co/CtmTrZ3/20210515-172112.jpg"
+            },
+            {
+                question: "O que amamos comer quando estamos juntos, após a janta?",
+                options: ["Sorvete", "Bolo", "Açaí", "Chocolate"],
+                answer: 2,
+                image: "https://i.ibb.co/LZhcP2H/20210729-022238.webp"
+            },
+            {
+                question: "Qual é o nosso hobby favorito?",
+                options: ["Cozinhar juntos", "Assistir séries", "Fazer trilhas", "Dançar no CTG"],
+                answer: 3,
+                image: "https://i.ibb.co/3cQNy9Q/20211107-183402.jpg"
+            },
+            {
+                question: "Por quais lugares eu passei no filme de pedido de casamento?",
+                options: ["Estrada do Mar, CCFC, Beira Mar e Cinema", "Paraguassu, CCFC e Cinema", "Paraguassu, CCFC, Beira Mar e Cinema", "Estrada do Mar, Paraguassu, CCFC, Cinema"],
+                answer: 0,
+                image: "https://i.ibb.co/nzzBR26/20220128-230933.webp"
+            },
+            {
+                question: "Onde estávamos quando pedi a sua mão em namoro?",
+                options: ["Dentro de casa, na mesa", "Na rua, em baixo da figueira", "No galpão", "Nos fundos"],
+                answer: 1,
+                image: "https://i.ibb.co/Wcy6YbG/20221217-192758.jpg"
+            }
+        ];
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+
+        function displayQuestion() {
+            const questionElement = document.getElementById('quiz-question');
+            const optionsElement = document.getElementById('quiz-options');
+            const imageElement = document.getElementById('quiz-image');
+            const currentQuestion = questions[currentQuestionIndex];
+
+            questionElement.textContent = currentQuestion.question;
+            imageElement.src = currentQuestion.image;
+            optionsElement.innerHTML = '';
+
+            currentQuestion.options.forEach((option, index) => {
+                const button = document.createElement('button');
+                button.textContent = option;
+                button.onclick = () => checkAnswer(index);
+                optionsElement.appendChild(button);
+            });
+        }
+
+        function checkAnswer(selectedIndex) {
+            const currentQuestion = questions[currentQuestionIndex];
+            const buttons = document.querySelectorAll('#quiz-options button');
+
+            buttons.forEach((button, index) => {
+                button.disabled = true; // Desabilita todos os botões
+                if (index === selectedIndex) {
+                    button.style.backgroundColor = selectedIndex === currentQuestion.answer ? 'green' : 'red'; // Verde para correto, vermelho para errado
+                }
+            });
+
+            if (selectedIndex === currentQuestion.answer) {
+                alert("Resposta correta!");
+                score++;
+            } else {
+                alert("Resposta errada!");
+            }
+            currentQuestionIndex++;
+            if (currentQuestionIndex < questions.length) {
+                setTimeout(displayQuestion, 1000); // Espera 1 segundo antes de mostrar a próxima pergunta
+            } else {
+                document.querySelector('button[onclick="nextQuizQuestion()"]').style.display = 'none';
+                document.querySelector('button[onclick="finalizeQuiz()"]').style.display = 'block';
+            }
+        }
+
+        function finalizeQuiz() {
+            const resultElement = document.getElementById('quiz-result');
+            resultElement.textContent = `Você acertou ${score} de ${questions.length} perguntas! Muito bem, meu amor.`;
+            nextSlide(4); // Vai para o slide de resultado
+        }
+
+        function nextSlide(slideIndex) {
+            const slides = document.querySelectorAll('.slide');
+            slides.forEach(slide => slide.classList.remove('active'));
+            document.getElementById(`slide-${slideIndex}`).classList.add('active');
+            if (slideIndex === 3) {
+                displayQuestion(); // Exibe a primeira pergunta do quiz
+            } else if (slideIndex === 7) {
+                showRandomMessage(); // Exibe uma mensagem aleatória
+            }
+        }
+
+        function showRandomMessage() {
+            const randomIndex = Math.floor(Math.random() * loveMessages.length);
+            document.getElementById('love-message').textContent = loveMessages[randomIndex];
+        }
+
+        displayQuestion();
+    </script>
+</body>
+</html>
